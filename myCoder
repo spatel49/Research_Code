@@ -1,0 +1,51 @@
+function myCoder() {
+  
+  var app = SpreadsheetApp;
+  var ss = app.getActiveSpreadsheet();
+  var activeSheet = ss.getActiveSheet();
+  var dict = {
+    1 : ["asjldnaskjdbasdj", "Animal/Other"],
+    2 : ["area", "Area", "region", "Region", "country", "Country", "africa", "Africa", "quarantine", "Quarantine", "AreaAway"],
+    3 : ["clean", "Clean", "bath", "Bath", "shower", "Shower", "hygie", "Hygie", "sanit", "Sanit", "sanitation", "Sanitation", "cover", "Cover", "Clean"],
+    4 : ["fruits", "Fruits", "veggies", "Veggies", "vegetable", "Vegetable", "diet", "Diet", "eat", "Eat", "food", "Food", "intake", "Intake", "ingest", "Ingest", "Diet"],
+    5 : ["disinfect", "Disinfect", "sterile", "Sterile", "surfaces", "Surfaces", "Disinfect"],
+    6 : ["exercise", "Exercise", "excersize", "working out", "work out", "gym", "fit", "Exercise"],
+    7 : ["hand", "Hand", "Hand"],
+    8 : ["asdkjabsduqiwbbda", "HEALTHY/Other"],
+    9 : ["immune", "Immune", "imune", "Imune", "Immune"],
+    10 : ["impossible", "Impossible", "not possible", "Impossible"],
+    11 : ["meds", "Meds", "medica", "Medica", "drugs", "Drugs", "medicine", "Medicine", "vitamin", "Vitamin", "antibio", "Antibio", "Meds"],
+    12 : ["avoid", "Avoid", "indoor", "Indoor", "contact", "Contact", "people", "People", "individuals", "Individuals", "infected", "Infected", "sick", "anyone", "Anyone", "social", "Social", "quarantine", "Quarantine", "others", "Others", "NoContact"],
+    13 : ["screening", "genetic", "DNA", "pregna", "Screening"],
+    14 : ["sleep", "Sleep", "rest", "Rest", "Sleep"],
+    15 : ["stress", "Stress", "tension", "Tension", "anxiety", "Anxiety", "nervous", "nervous", "pressure", "Pressure", "Stress"],
+    16 : ["vaccine", "Vaccine", "Vacc", "vacc", "immuniza", "Immuniza", "shot", "Vaccine"],
+    17 : ["unsure", "not sure", "IDK"],
+    18 : ["raw", "Raw", "meat", "Meat", "Avoid Meat", "Other"],
+    19 : ["cloth", "Clothing", "Other"],
+    20 : ["research", "Research", "educat", "Educat", "aware", "Aware", "indentify", "Identify", "learn", "Learn", "teach", "Teach", "knowled", "Knowled", "Education", "Other"],
+    21 : ["ppe", "PPE", "Ppe", "protective equipment", "PPE", "Other"]
+  };
+  
+  var range = activeSheet.getRange(2, 4, 200);
+  range.clear();
+  
+  for (var i = 1; i < 201; i++){
+    for (var j = 1; j <= Object.keys(dict).length; j++){
+      for (var k = 0; k < dict[j].length; k++){
+        var someCell = activeSheet.getRange(i+1, 3).getValue();
+        var codeCell = activeSheet.getRange(i+1, 4).getValue();
+        
+        if (someCell.indexOf(dict[j][k])>-1){
+          if (codeCell.length == 0) {
+            activeSheet.getRange(i + 1, 4).setValue(dict[j][dict[j].length - 1]);
+          } else {
+            activeSheet.getRange(i + 1, 4).setValue(codeCell + ", " + dict[j][dict[j].length - 1]);
+          }
+          k = dict[j].length;
+        }
+        
+      }
+    }
+  }
+}
